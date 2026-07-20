@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Kod - Dori Qidiruv</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1b3e 100%);
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .sms-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .app-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .phone-display {
+            color: #4fc3f7;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .code-inputs {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .code-input {
+            width: 60px;
+            height: 70px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            color: white;
+            font-size: 1.8rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .code-input:focus {
+            border-color: #4fc3f7;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+            transform: scale(1.05);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            border: none;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .resend-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .resend-link:hover {
+            color: #4fc3f7;
+        }
+
+        .back-link {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #4fc3f7;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem;
+            border-radius: 20px;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 1rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .code-input {
+                width: 50px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .code-inputs {
+                gap: 0.5rem;
+            }
+
+            .glass-card {
+                padding: 2.5rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sms-container">
+        <div class="logo">✉️</div>
+        <div class="app-name">Dori Qidiruv</div>
+        
+        <div class="glass-card">
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('uz')">UZ</button>
+                <button class="lang-btn" onclick="setLang('ru')">RU</button>
+            </div>
+
+            <h1 data-uz="SMS kodni kiriting" data-ru="Введите SMS код">SMS kodni kiriting</h1>
+            <p class="subtitle" data-uz="Raqamingizga yuborilgan kodni kiriting" data-ru="Введите код, отправленный на ваш номер">Raqamingizga yuborilgan kodni kiriting</p>
+            <p class="phone-display" id="phoneDisplay">+998 XX XXX XX XX</p>
+            
+            <form id="smsForm" onsubmit="handleSubmit(event)">
+                <div class="code-inputs">
+                    <input type="text" class="code-input" maxlength="1" data-index="0" autocomplete="off">
+                    <input type="text" class="code-input" maxlength="1" data-index="1" autocomplete="off">
+                    <input type="text" class="code-input" maxlength="1" data-index="2" autocomplete="off">
+                    <input type="text" class="code-input" maxlength="1" data-index="3" autocomplete="off">
+                    <input type="text" class="code-input" maxlength="1" data-index="4" autocomplete="off">
+                    <input type="text" class="code-input" maxlength="1" data-index="5" autocomplete="off">
+                </div>
+                
+                <p class="error-message" id="errorMessage" data-uz="Noto'g'ri kod" data-ru="Неверный код">Noto'g'ri kod</p>
+                
+                <button type="submit" class="submit-btn" id="submitBtn" data-uz="Tasdiqlash" data-ru="Подтвердить">Tasdiqlash</button>
+                
+                <a href="#" class="resend-link" onclick="resendCode(event)" data-uz="Kodni qayta yuborish" data-ru="Отправить код повторно">Kodni qayta yuborish</a><br>
+                <a href="login.html" class="back-link" data-uz="← Orqaga" data-ru="← Назад">← Orqaga</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'uz';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('[data-uz]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+        }
+
+        const phone = localStorage.getItem('phone') || '+998 XX XXX XX XX';
+        const phoneDisplay = document.getElementById('phoneDisplay');
+        phoneDisplay.textContent = phone.replace(/(\+998)(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+
+        const inputs = document.querySelectorAll('.code-input');
+        const errorMessage = document.getElementById('errorMessage');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
+                
+                if (value.match(/[0-9]/)) {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                } else {
+                    e.target.value = '';
+                }
+                
+                errorMessage.classList.remove('show');
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+                
+                if (e.key === 'ArrowLeft' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+                
+                if (e.key === 'ArrowRight' && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pastedData = e.clipboardData.getData('text').replace(/\D/g, '');
+                
+                for (let i = 0; i < Math.min(pastedData.length, 6); i++) {
+                    if (index + i < inputs.length) {
+                        inputs[index + i].value = pastedData[i];
+                    }
+                }
+                
+                const lastFilledIndex = Math.min(index + pastedData.length, inputs.length - 1);
+                inputs[lastFilledIndex].focus();
+            });
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const code = Array.from(inputs).map(input => input.value).join('');
+            
+            if (code.length !== 6) {
+                errorMessage.textContent = currentLang === 'uz' 
+                    ? 'Iltimos, barcha raqamlarni kiriting' 
+                    : 'Пожалуйста, введите все цифры';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            localStorage.setItem('smsCode', code);
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = currentLang === 'uz' ? 'Tekshirilmoqda...' : 'Проверка...';
+
+            setTimeout(() => {
+                window.location.href = 'ism.html';
+            }, 800);
+        }
+
+        function resendCode(e) {
+            e.preventDefault();
+            const link = e.target;
+            link.style.opacity = '0.5';
+            link.style.pointerEvents = 'none';
+            
+            const originalText = link.textContent;
+            link.textContent = currentLang === 'uz' ? 'Yuborildi ✓' : 'Отправлено ✓';
+            
+            setTimeout(() => {
+                link.style.opacity = '1';
+                link.style.pointerEvents = 'auto';
+                link.textContent = originalText;
+            }, 3000);
+        }
+
+        inputs[0].focus();
+    </script>
+</body>
+</html>

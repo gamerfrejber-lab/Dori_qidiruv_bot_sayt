@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Dori Qidiruv</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1b3e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4fc3f7;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem;
+            border-radius: 20px;
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.8rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .profile-container {
+            margin-top: 2rem;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 40px rgba(79, 195, 247, 0.4);
+        }
+
+        .user-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-phone {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #4fc3f7;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .info-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .login-prompt {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .login-prompt h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-prompt p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .login-link {
+            padding: 1.2rem 3rem;
+            border: none;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .login-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .user-name {
+                font-size: 2rem;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">💊 Dori Qidiruv</div>
+            <nav>
+                <a href="index.html" data-uz="Bosh sahifa" data-ru="Главная">Bosh sahifa</a>
+                <a href="dorixonalar.html" data-uz="Dorixonalar" data-ru="Аптеки">Dorixonalar</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('uz')">UZ</button>
+                    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="profileContent"></div>
+    </div>
+
+    <footer>
+        <p data-uz="© 2024 Dori Qidiruv. Barcha huquqlar himoyalangan." data-ru="© 2024 Поиск лекарств. Все права защищены.">© 2024 Dori Qidiruv. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script>
+        let currentLang = 'uz';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('[data-uz]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+        }
+
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const userName = localStorage.getItem('userName');
+        const userPhone = localStorage.getItem('phone') || '+998 XX XXX XX XX';
+        const profileContent = document.getElementById('profileContent');
+
+        if (isLoggedIn && userName) {
+            displayProfile();
+        } else {
+            displayLoginPrompt();
+        }
+
+        function displayProfile() {
+            const joinDate = new Date().toLocaleDateString('uz-UZ', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            profileContent.innerHTML = `
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="avatar">👤</div>
+                        <h1 class="user-name">${userName}</h1>
+                        <p class="user-phone">${userPhone}</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 class="card-title">📋 <span data-uz="Shaxsiy ma'lumotlar" data-ru="Личные данные">${currentLang === 'uz' ? 'Shaxsiy ma\'lumotlar' : 'Личные данные'}</span></h3>
+                        <div class="info-row">
+                            <span class="info-label" data-uz="Ism" data-ru="Имя">${currentLang === 'uz' ? 'Ism' : 'Имя'}</span>
+                            <span class="info-value">${userName}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label" data-uz="Telefon" data-ru="Телефон">${currentLang === 'uz' ? 'Telefon' : 'Телефон'}</span>
+                            <span class="info-value">${userPhone}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label" data-uz="Ro'yxatdan o'tgan" data-ru="Зарегистрирован">${currentLang === 'uz' ? 'Ro\'yxatdan o\'tgan' : 'Зарегистрирован'}</span>
+                            <span class="info-value">${joinDate}</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 class="card-title">📊 <span data-uz="Statistika" data-ru="Статистика">${currentLang === 'uz' ? 'Statistika' : 'Статистика'}</span></h3>
+                        <div class="info-row">
+                            <span class="info-label" data-uz="Qidiruvlar soni" data-ru="Количество поисков">${currentLang === 'uz' ? 'Qidiruvlar soni' : 'Количество поисков'}</span>
+                            <span class="info-value">0</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label" data-uz="Saqlangan dorilar" data-ru="Сохраненные лекарства">${currentLang === 'uz' ? 'Saqlangan dorilar' : 'Сохраненные лекарства'}</span>
+                            <span class="info-value">0</span>
+                        </div>
+                    </div>
+
+                    <button class="logout-btn" onclick="logout()">
+                        <span data-uz="🚪 Chiqish" data-ru="🚪 Выйти">${currentLang === 'uz' ? '🚪 Chiqish' : '🚪 Выйти'}</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function displayLoginPrompt() {
+            profileContent.innerHTML = `
+                <div class="login-prompt">
+                    <div class="glass-card">
+                        <h2 data-uz="Profilga kirish" data-ru="Войти в профиль">${currentLang === 'uz' ? 'Profilga kirish' : 'Войти в профиль'}</h2>
+                        <p data-uz="Shaxsiy hisobingizga kirish uchun tizimga kiring" data-ru="Войдите в систему, чтобы получить доступ к вашему профилю">${currentLang === 'uz' ? 'Shaxsiy hisobingizga kirish uchun tizimga kiring' : 'Войдите в систему, чтобы получить доступ к вашему профилю'}</p>
+                        <a href="login.html" class="login-link">
+                            <span data-uz="Kirish" data-ru="Войти">${currentLang === 'uz' ? 'Kirish' : 'Войти'}</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function logout() {
+            const confirmLogout = confirm(currentLang === 'uz' 
+                ? 'Haqiqatan ham chiqmoqchimisiz?' 
+                : 'Вы действительно хотите выйти?');
+            
+            if (confirmLogout) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('phone');
+                localStorage.removeItem('smsCode');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

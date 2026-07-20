@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dori Qidiruv - Dori topish endi oson</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1b3e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4fc3f7;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem;
+            border-radius: 20px;
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.8rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+        }
+
+        .login-btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3.5rem 1.2rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #4fc3f7;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .tag:hover {
+            background: rgba(79, 195, 247, 0.2);
+            border-color: #4fc3f7;
+            transform: translateY(-2px);
+        }
+
+        .search-results {
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .search-results.show {
+            display: block;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(79, 195, 247, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            text-align: center;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .dori-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #4fc3f7;
+        }
+
+        .dori-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0.3rem 0;
+            line-height: 1.6;
+        }
+
+        .dorixona-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #7c4dff;
+        }
+
+        .dorixona-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .dorixona-card .icon {
+            margin-right: 0.5rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">💊 Dori Qidiruv</div>
+            <nav>
+                <a href="index.html" data-uz="Bosh sahifa" data-ru="Главная">Bosh sahifa</a>
+                <a href="dorixonalar.html" data-uz="Dorixonalar" data-ru="Аптеки">Dorixonalar</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('uz')">UZ</button>
+                    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+                </div>
+                <button class="login-btn" onclick="location.href='login.html'" data-uz="Kirish" data-ru="Войти">Kirish</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1 data-uz="Assalomu alaykum! Dori topish endi oson" data-ru="Здравствуйте! Найти лекарство теперь просто">Assalomu alaykum! Dori topish endi oson</h1>
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Dori nomini kiriting..." data-placeholder-uz="Dori nomini kiriting..." data-placeholder-ru="Введите название лекарства...">
+            <span class="search-icon">🔍</span>
+        </div>
+        <div class="tags">
+            <div class="tag" onclick="quickSearch('Paracetamol')">💊 Paracetamol</div>
+            <div class="tag" onclick="quickSearch('Ibuprofen')">💊 Ibuprofen</div>
+            <div class="tag" onclick="quickSearch('Amoxicillin')">💊 Amoxicillin</div>
+            <div class="tag" onclick="quickSearch('Aspirin')">💊 Aspirin</div>
+            <div class="tag" onclick="quickSearch('Vitamin C')">💊 Vitamin C</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="search-results" id="searchResults"></div>
+
+        <h2 class="section-title" data-uz="💊 Mashhur dorilar" data-ru="💊 Популярные лекарства">💊 Mashhur dorilar</h2>
+        <div class="cards-grid" id="popularMeds">
+            <div class="glass-card dori-card">
+                <h3>Paracetamol 500mg</h3>
+                <p><strong data-uz="Ishlab chiqaruvchi:" data-ru="Производитель:">Ishlab chiqaruvchi:</strong> Farmstandart</p>
+                <p><strong data-uz="Narx:" data-ru="Цена:">Narx:</strong> 8,000 so'm</p>
+                <p><strong data-uz="Tavsif:" data-ru="Описание:">Tavsif:</strong> Og'riq va isitmani kamaytiruvchi dori</p>
+            </div>
+            <div class="glass-card dori-card">
+                <h3>Ibuprofen 400mg</h3>
+                <p><strong data-uz="Ishlab chiqaruvchi:" data-ru="Производитель:">Ishlab chiqaruvchi:</strong> Jurabek Laboratoriya</p>
+                <p><strong data-uz="Narx:" data-ru="Цена:">Narx:</strong> 12,000 so'm</p>
+                <p><strong data-uz="Tavsif:" data-ru="Описание:">Tavsif:</strong> Yallig'lanishga qarshi dori</p>
+            </div>
+            <div class="glass-card dori-card">
+                <h3>Vitamin C 1000mg</h3>
+                <p><strong data-uz="Ishlab chiqaruvchi:" data-ru="Производитель:">Ishlab chiqaruvchi:</strong> Health Plus</p>
+                <p><strong data-uz="Narx:" data-ru="Цена:">Narx:</strong> 15,000 so'm</p>
+                <p><strong data-uz="Tavsif:" data-ru="Описание:">Tavsif:</strong> Immunitetni mustahkamlovchi vitamin</p>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-uz="🏥 Yaqin dorixonalar" data-ru="🏥 Ближайшие аптеки">🏥 Yaqin dorixonalar</h2>
+        <div class="cards-grid" id="nearbyPharmacies"></div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label" data-uz="Turli xil dorilar" data-ru="Различных лекарств">Turli xil dorilar</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">120+</div>
+                <div class="stat-label" data-uz="Dorixonalar tarmog'i" data-ru="Аптечная сеть">Dorixonalar tarmog'i</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label" data-uz="Xizmat vaqti" data-ru="Время работы">Xizmat vaqti</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p data-uz="© 2024 Dori Qidiruv. Barcha huquqlar himoyalangan." data-ru="© 2024 Поиск лекарств. Все права защищены.">© 2024 Dori Qidiruv. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script>
+        let currentLang = 'uz';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('[data-uz]').forEach(el => {
+                if (el.tagName === 'INPUT') {
+                    el.placeholder = el.getAttribute('data-placeholder-' + lang);
+                } else {
+                    el.textContent = el.getAttribute('data-' + lang);
+                }
+            });
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        let searchTimeout;
+
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            const query = e.target.value.trim();
+
+            if (query.length < 2) {
+                document.getElementById('searchResults').classList.remove('show');
+                return;
+            }
+
+            searchTimeout = setTimeout(() => searchMedicine(query), 500);
+        });
+
+        function quickSearch(name) {
+            searchInput.value = name;
+            searchMedicine(name);
+        }
+
+        async function searchMedicine(query) {
+            try {
+                const response = await fetch(`/api/dori/qidirish?nomi=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                displaySearchResults(data);
+            } catch (error) {
+                console.log('API unavailable, using mock data');
+                const mockData = [
+                    { nomi: query, ishlab_chiqaruvchi: 'Farmstandart', narx: 10000, tavsif: 'Samarali dori' },
+                    { nomi: query + ' forte', ishlab_chiqaruvchi: 'Jurabek Lab', narx: 15000, tavsif: 'Kuchli ta\'sir' }
+                ];
+                displaySearchResults(mockData);
+            }
+        }
+
+        function displaySearchResults(results) {
+            const resultsDiv = document.getElementById('searchResults');
+
+            if (!results || results.length === 0) {
+                resultsDiv.innerHTML = '<div class="glass-card"><p style="text-align:center;">Hech narsa topilmadi 😔</p></div>';
+                resultsDiv.classList.add('show');
+                return;
+            }
+
+            resultsDiv.innerHTML = results.map(dori => `
+                <div class="glass-card dori-card">
+                    <h3>${dori.nomi || dori.name}</h3>
+                    <p><strong>${currentLang === 'uz' ? 'Ishlab chiqaruvchi:' : 'Производитель:'}</strong> ${dori.ishlab_chiqaruvchi || dori.manufacturer || 'N/A'}</p>
+                    <p><strong>${currentLang === 'uz' ? 'Narx:' : 'Цена:'}</strong> ${(dori.narx || dori.price || 0).toLocaleString()} so'm</p>
+                    <p><strong>${currentLang === 'uz' ? 'Tavsif:' : 'Описание:'}</strong> ${dori.tavsif || dori.description || ''}</p>
+                </div>
+            `).join('');
+
+            resultsDiv.classList.add('show');
+        }
+
+        async function loadPharmacies() {
+            try {
+                const response = await fetch('/api/dorixona/barchasi');
+                const data = await response.json();
+                displayPharmacies(data);
+            } catch (error) {
+                console.log('API unavailable, using mock data');
+                const mockPharmacies = [
+                    { nomi: 'Farmatsiya №1', manzil: 'Amir Temur ko\'chasi, 15', telefon: '+998 71 123-45-67', ish_vaqti: '08:00 - 22:00' },
+                    { nomi: 'Salomatlik Dorixonasi', manzil: 'Bobur ko\'chasi, 28', telefon: '+998 71 234-56-78', ish_vaqti: '24/7' },
+                    { nomi: 'Shifo Apteka', manzil: 'Navoi ko\'chasi, 42', telefon: '+998 71 345-67-89', ish_vaqti: '09:00 - 21:00' }
+                ];
+                displayPharmacies(mockPharmacies);
+            }
+        }
+
+        function displayPharmacies(pharmacies) {
+            const container = document.getElementById('nearbyPharmacies');
+            const displayList = pharmacies.slice(0, 3);
+
+            container.innerHTML = displayList.map(dorixona => `
+                <div class="glass-card dorixona-card">
+                    <h3>${dorixona.nomi || dorixona.name}</h3>
+                    <p><span class="icon">📍</span>${dorixona.manzil || dorixona.address}</p>
+                    <p><span class="icon">📞</span>${dorixona.telefon || dorixona.phone}</p>
+                    <p><span class="icon">🕐</span>${dorixona.ish_vaqti || dorixona.working_hours}</p>
+                </div>
+            `).join('');
+        }
+
+        loadPharmacies();
+    </script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dorixonalar - Dori Qidiruv</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1b3e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4fc3f7;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem;
+            border-radius: 20px;
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.8rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+        }
+
+        .profile-btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            background: linear-gradient(135deg, #4fc3f7, #7c4dff);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+
+        .profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .pharmacies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(79, 195, 247, 0.2);
+        }
+
+        .pharmacy-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #7c4dff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pharmacy-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        .info-icon {
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+
+        .info-text {
+            flex: 1;
+        }
+
+        .map-btn {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #4fc3f7;
+            background: rgba(79, 195, 247, 0.1);
+            color: #4fc3f7;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .map-btn:hover {
+            background: rgba(79, 195, 247, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .pharmacies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">💊 Dori Qidiruv</div>
+            <nav>
+                <a href="index.html" data-uz="Bosh sahifa" data-ru="Главная">Bosh sahifa</a>
+                <a href="dorixonalar.html" data-uz="Dorixonalar" data-ru="Аптеки">Dorixonalar</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('uz')">UZ</button>
+                    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+                </div>
+                <a href="profil.html" class="profile-btn" id="profileBtn" data-uz="Profil" data-ru="Профиль">Kirish</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title" data-uz="🏥 Barcha Dorixonalar" data-ru="🏥 Все Аптеки">🏥 Barcha Dorixonalar</h1>
+        <p class="subtitle" data-uz="Yaqin atrofdagi dorixonalarni toping" data-ru="Найдите ближайшие аптеки">Yaqin atrofdagi dorixonalarni toping</p>
+        
+        <div id="pharmaciesContainer">
+            <div class="loading" data-uz="Yuklanmoqda" data-ru="Загрузка">Yuklanmoqda</div>
+        </div>
+    </div>
+
+    <footer>
+        <p data-uz="© 2024 Dori Qidiruv. Barcha huquqlar himoyalangan." data-ru="© 2024 Поиск лекарств. Все права защищены.">© 2024 Dori Qidiruv. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script>
+        let currentLang = 'uz';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('[data-uz]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+        }
+
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const userName = localStorage.getItem('userName');
+        const profileBtn = document.getElementById('profileBtn');
+
+        if (isLoggedIn && userName) {
+            profileBtn.textContent = userName;
+            profileBtn.href = 'profil.html';
+        } else {
+            profileBtn.textContent = currentLang === 'uz' ? 'Kirish' : 'Войти';
+            profileBtn.href = 'login.html';
+        }
+
+        async function loadPharmacies() {
+            try {
+                const response = await fetch('/api/dorixona/barchasi');
+                const data = await response.json();
+                displayPharmacies(data);
+            } catch (error) {
+                console.log('API unavailable, using mock data');
+                const mockPharmacies = [
+                    { nomi: 'Farmatsiya №1', manzil: 'Amir Temur ko\'chasi, 15', telefon: '+998 71 123-45-67', ish_vaqti: '08:00 - 22:00' },
+                    { nomi: 'Salomatlik Dorixonasi', manzil: 'Bobur ko\'chasi, 28', telefon: '+998 71 234-56-78', ish_vaqti: '24/7' },
+                    { nomi: 'Shifo Apteka', manzil: 'Navoi ko\'chasi, 42', telefon: '+998 71 345-67-89', ish_vaqti: '09:00 - 21:00' },
+                    { nomi: 'Darmon Dorixonasi', manzil: 'Mustaqillik shoh ko\'chasi, 67', telefon: '+998 71 456-78-90', ish_vaqti: '08:00 - 20:00' },
+                    { nomi: 'Sog\'lom Hayot', manzil: 'Mirzo Ulug\'bek ko\'chasi, 89', telefon: '+998 71 567-89-01', ish_vaqti: '24/7' },
+                    { nomi: 'Medika Plus', manzil: 'Shahriston ko\'chasi, 12', telefon: '+998 71 678-90-12', ish_vaqti: '09:00 - 23:00' }
+                ];
+                displayPharmacies(mockPharmacies);
+            }
+        }
+
+        function displayPharmacies(pharmacies) {
+            const container = document.getElementById('pharmaciesContainer');
+            
+            if (!pharmacies || pharmacies.length === 0) {
+                container.innerHTML = '<p class="subtitle">Dorixonalar topilmadi 😔</p>';
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'pharmacies-grid';
+
+            grid.innerHTML = pharmacies.map(pharmacy => `
+                <div class="glass-card pharmacy-card">
+                    <h3>🏥 ${pharmacy.nomi || pharmacy.name}</h3>
+                    <div class="pharmacy-info">
+                        <div class="info-row">
+                            <span class="info-icon">📍</span>
+                            <span class="info-text">${pharmacy.manzil || pharmacy.address}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">📞</span>
+                            <span class="info-text">${pharmacy.telefon || pharmacy.phone}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">🕐</span>
+                            <span class="info-text">${pharmacy.ish_vaqti || pharmacy.working_hours}</span>
+                        </div>
+                    </div>
+                    <button class="map-btn" onclick="showOnMap('${pharmacy.nomi || pharmacy.name}')">
+                        <span data-uz="📍 Xaritada ko'rish" data-ru="📍 Показать на карте">${currentLang === 'uz' ? '📍 Xaritada ko\'rish' : '📍 Показать на карте'}</span>
+                    </button>
+                </div>
+            `).join('');
+
+            container.innerHTML = '';
+            container.appendChild(grid);
+        }
+
+        function showOnMap(pharmacyName) {
+            alert((currentLang === 'uz' ? 'Xaritada ochilmoqda: ' : 'Открывается на карте: ') + pharmacyName);
+        }
+
+        loadPharmacies();
+    </script>
+</body>
+</html>
