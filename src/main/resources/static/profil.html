@@ -285,20 +285,30 @@
             });
         }
 
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        const userName = localStorage.getItem('userName');
-        const userPhone = localStorage.getItem('phone') || '+998 XX XXX XX XX';
+        const token = localStorage.getItem('token');
         const profileContent = document.getElementById('profileContent');
 
-        if (isLoggedIn && userName) {
-            displayProfile();
+        if (token) {
+            fetch('/api/auth/profile', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            })
+                .then(response => response.ok ? response.json() : Promise.reject())
+                .then(user => displayProfile(user))
+                .catch(() => {
+                    localStorage.removeItem('token');
+                    displayLoginPrompt();
+                });
         } else {
             displayLoginPrompt();
         }
 
-        function displayProfile() {
-            const joinDate = new Date().toLocaleDateString('uz-UZ', { year: 'numeric', month: 'long', day: 'numeric' });
-            
+        function displayProfile(user) {
+            const userName = user.name || (currentLang === 'uz' ? 'Foydalanuvchi' : 'Пользователь');
+            const userPhone = user.phoneNumber || '';
+            const joinDate = user.createdAt
+                ? new Date(user.createdAt).toLocaleDateString('uz-UZ', { year: 'numeric', month: 'long', day: 'numeric' })
+                : new Date().toLocaleDateString('uz-UZ', { year: 'numeric', month: 'long', day: 'numeric' });
+
             profileContent.innerHTML = `
                 <div class="profile-container">
                     <div class="profile-header">
@@ -362,6 +372,7 @@
                 : 'Вы действительно хотите выйти?');
             
             if (confirmLogout) {
+                localStorage.removeItem('token');
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('userName');
                 localStorage.removeItem('phone');

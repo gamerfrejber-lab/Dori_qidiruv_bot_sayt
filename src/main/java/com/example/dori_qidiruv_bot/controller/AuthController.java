@@ -2,6 +2,7 @@ package com.example.dori_qidiruv_bot.controller;
 
 import com.example.dori_qidiruv_bot.dto.AuthRequest;
 import com.example.dori_qidiruv_bot.dto.AuthResponse;
+import com.example.dori_qidiruv_bot.dto.UpdateNameRequest;
 import com.example.dori_qidiruv_bot.dto.VerifyRequest;
 import com.example.dori_qidiruv_bot.entity.User;
 import com.example.dori_qidiruv_bot.service.AuthService;
@@ -55,6 +56,23 @@ public class AuthController {
                 token = token.substring(7);
             }
             User user = authService.getUserByToken(token);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    /**
+     * Ro'yxatdan o'tishning oxirgi bosqichi - foydalanuvchi ismini saqlash
+     */
+    @PutMapping("/profile")
+    public ResponseEntity<User> updateProfile(@RequestHeader("Authorization") String token,
+                                               @RequestBody UpdateNameRequest request) {
+        try {
+            if (token.startsWith("Bearer ")) {
+                token = token.substring(7);
+            }
+            User user = authService.updateName(token, request.getName());
             return ResponseEntity.ok(user);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

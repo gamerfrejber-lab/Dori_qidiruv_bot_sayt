@@ -294,7 +294,7 @@
 
         async function loadPharmacies() {
             try {
-                const response = await fetch('/api/dorixona/barchasi');
+                const response = await fetch('/api/dorixona');
                 const data = await response.json();
                 displayPharmacies(data);
             } catch (error) {

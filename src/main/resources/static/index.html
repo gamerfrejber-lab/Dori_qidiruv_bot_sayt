@@ -420,6 +420,13 @@
         async function searchMedicine(query) {
             try {
                 const response = await fetch(`/api/dori/qidirish?nomi=${encodeURIComponent(query)}`);
+                if (response.status === 404) {
+                    displaySearchResults([]);
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error('server error');
+                }
                 const data = await response.json();
                 displaySearchResults(data);
             } catch (error) {
@@ -455,7 +462,7 @@
 
         async function loadPharmacies() {
             try {
-                const response = await fetch('/api/dorixona/barchasi');
+                const response = await fetch('/api/dorixona');
                 const data = await response.json();
                 displayPharmacies(data);
             } catch (error) {

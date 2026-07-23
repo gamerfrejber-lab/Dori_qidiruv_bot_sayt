@@ -98,4 +98,13 @@ public class AuthService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User topilmadi"));
     }
+
+    /**
+     * Token orqali userning ismini yangilash (ro'yxatdan o'tishning oxirgi bosqichi)
+     */
+    public User updateName(String token, String name) {
+        User user = getUserByToken(token);
+        user.setName(name);
+        return userRepository.save(user);
+    }
 }

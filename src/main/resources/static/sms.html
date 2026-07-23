@@ -304,39 +304,69 @@
             });
         });
 
-        function handleSubmit(e) {
+        async function handleSubmit(e) {
             e.preventDefault();
-            
+
             const code = Array.from(inputs).map(input => input.value).join('');
-            
+
             if (code.length !== 6) {
-                errorMessage.textContent = currentLang === 'uz' 
-                    ? 'Iltimos, barcha raqamlarni kiriting' 
+                errorMessage.textContent = currentLang === 'uz'
+                    ? 'Iltimos, barcha raqamlarni kiriting'
                     : 'Пожалуйста, введите все цифры';
                 errorMessage.classList.add('show');
                 return;
             }
 
-            localStorage.setItem('smsCode', code);
-            
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.textContent = currentLang === 'uz' ? 'Tekshirilmoqda...' : 'Проверка...';
 
-            setTimeout(() => {
+            try {
+                const response = await fetch('/api/auth/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneNumber: phone, code })
+                });
+                const data = await response.json();
+
+                if (!response.ok || !data.token) {
+                    errorMessage.textContent = data.message || errorMessage.textContent;
+                    errorMessage.classList.add('show');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'uz' ? 'Tasdiqlash' : 'Подтвердить';
+                    return;
+                }
+
+                localStorage.setItem('token', data.token);
                 window.location.href = 'ism.html';
-            }, 800);
+            } catch (error) {
+                errorMessage.textContent = currentLang === 'uz'
+                    ? 'Serverga ulanib bo\'lmadi. Qayta urinib ko\'ring.'
+                    : 'Не удалось подключиться к серверу. Попробуйте снова.';
+                errorMessage.classList.add('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = currentLang === 'uz' ? 'Tasdiqlash' : 'Подтвердить';
+            }
         }
 
-        function resendCode(e) {
+        async function resendCode(e) {
             e.preventDefault();
             const link = e.target;
             link.style.opacity = '0.5';
             link.style.pointerEvents = 'none';
-            
+
             const originalText = link.textContent;
-            link.textContent = currentLang === 'uz' ? 'Yuborildi ✓' : 'Отправлено ✓';
-            
+            try {
+                await fetch('/api/auth/send-code', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneNumber: phone })
+                });
+                link.textContent = currentLang === 'uz' ? 'Yuborildi ✓' : 'Отправлено ✓';
+            } catch (error) {
+                link.textContent = currentLang === 'uz' ? 'Xatolik ✗' : 'Ошибка ✗';
+            }
+
             setTimeout(() => {
                 link.style.opacity = '1';
                 link.style.pointerEvents = 'auto';

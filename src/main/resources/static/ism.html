@@ -220,34 +220,73 @@
 
         const nameInput = document.getElementById('nameInput');
         const errorMessage = document.getElementById('errorMessage');
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            window.location.href = 'login.html';
+        } else {
+            fetch('/api/auth/profile', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            })
+                .then(response => response.ok ? response.json() : Promise.reject())
+                .then(user => {
+                    if (user.name && user.name.trim().length >= 2) {
+                        window.location.href = 'index.html';
+                    }
+                })
+                .catch(() => { /* profilni olib bo'lmadi - foydalanuvchi ismini shu yerda kiritadi */ });
+        }
 
         nameInput.addEventListener('input', () => {
             errorMessage.classList.remove('show');
         });
 
-        function handleSubmit(e) {
+        async function handleSubmit(e) {
             e.preventDefault();
-            
+
             const name = nameInput.value.trim();
-            
+
             if (name.length < 2) {
-                errorMessage.textContent = currentLang === 'uz' 
-                    ? 'Iltimos, to\'liq ismingizni kiriting' 
+                errorMessage.textContent = currentLang === 'uz'
+                    ? 'Iltimos, to\'liq ismingizni kiriting'
                     : 'Пожалуйста, введите ваше полное имя';
                 errorMessage.classList.add('show');
                 return;
             }
 
-            localStorage.setItem('userName', name);
-            localStorage.setItem('isLoggedIn', 'true');
-            
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.textContent = currentLang === 'uz' ? 'Saqlanmoqda...' : 'Сохранение...';
 
-            setTimeout(() => {
+            try {
+                const response = await fetch('/api/auth/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ name })
+                });
+
+                if (!response.ok) {
+                    errorMessage.textContent = currentLang === 'uz' ? 'Xatolik yuz berdi' : 'Произошла ошибка';
+                    errorMessage.classList.add('show');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'uz' ? 'Davom etish' : 'Продолжить';
+                    return;
+                }
+
+                localStorage.setItem('userName', name);
+                localStorage.setItem('isLoggedIn', 'true');
                 window.location.href = 'index.html';
-            }, 600);
+            } catch (error) {
+                errorMessage.textContent = currentLang === 'uz'
+                    ? 'Serverga ulanib bo\'lmadi. Qayta urinib ko\'ring.'
+                    : 'Не удалось подключиться к серверу. Попробуйте снова.';
+                errorMessage.classList.add('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = currentLang === 'uz' ? 'Davom etish' : 'Продолжить';
+            }
         }
 
         nameInput.focus();

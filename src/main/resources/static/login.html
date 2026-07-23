@@ -275,29 +275,51 @@
             errorMessage.classList.remove('show');
         });
 
-        function handleSubmit(e) {
+        async function handleSubmit(e) {
             e.preventDefault();
-            
+
             const phone = phoneInput.value.replace(/\s/g, '');
-            
+
             if (phone.length !== 9) {
-                errorMessage.textContent = currentLang === 'uz' 
-                    ? 'Iltimos, to\'g\'ri raqam kiriting' 
+                errorMessage.textContent = currentLang === 'uz'
+                    ? 'Iltimos, to\'g\'ri raqam kiriting'
                     : 'Пожалуйста, введите правильный номер';
                 errorMessage.classList.add('show');
                 return;
             }
 
             const fullPhone = '+998' + phone;
-            localStorage.setItem('phone', fullPhone);
-            
+
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.textContent = currentLang === 'uz' ? 'Yuborilmoqda...' : 'Отправка...';
 
-            setTimeout(() => {
+            try {
+                const response = await fetch('/api/auth/send-code', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneNumber: fullPhone })
+                });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    errorMessage.textContent = data.message || (currentLang === 'uz' ? 'Xatolik yuz berdi' : 'Произошла ошибка');
+                    errorMessage.classList.add('show');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'uz' ? 'Kod yuborish' : 'Отправить код';
+                    return;
+                }
+
+                localStorage.setItem('phone', fullPhone);
                 window.location.href = 'sms.html';
-            }, 800);
+            } catch (error) {
+                errorMessage.textContent = currentLang === 'uz'
+                    ? 'Serverga ulanib bo\'lmadi. Qayta urinib ko\'ring.'
+                    : 'Не удалось подключиться к серверу. Попробуйте снова.';
+                errorMessage.classList.add('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = currentLang === 'uz' ? 'Kod yuborish' : 'Отправить код';
+            }
         }
 
         phoneInput.focus();
