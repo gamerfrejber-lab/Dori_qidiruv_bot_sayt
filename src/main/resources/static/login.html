@@ -158,6 +158,30 @@
             display: block;
         }
 
+        .telegram-hint {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(79, 195, 247, 0.1);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 16px;
+            padding: 0.9rem 1.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: left;
+        }
+
+        .telegram-hint a {
+            color: #4fc3f7;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .telegram-hint a:hover {
+            text-decoration: underline;
+        }
+
         .lang-switch {
             display: flex;
             gap: 0.5rem;
@@ -212,7 +236,12 @@
 
             <h1 data-uz="Telefon raqamingizni kiriting" data-ru="Введите номер телефона">Telefon raqamingizni kiriting</h1>
             <p class="subtitle" data-uz="Tasdiqlash kodi yuboriladi" data-ru="Вам будет отправлен код подтверждения">Tasdiqlash kodi yuboriladi</p>
-            
+
+            <div class="telegram-hint">
+                <span>📌</span>
+                <span data-uz-html="Kodni tezroq olish uchun avval Telegram'da <a href='https://t.me/dori_UzBot' target='_blank' rel='noopener'>@dori_UzBot</a>'ga <b>/start</b> bosing." data-ru-html="Чтобы код пришёл быстрее, сначала нажмите <b>/start</b> в Telegram у <a href='https://t.me/dori_UzBot' target='_blank' rel='noopener'>@dori_UzBot</a>.">Kodni tezroq olish uchun avval Telegram'da <a href="https://t.me/dori_UzBot" target="_blank" rel="noopener">@dori_UzBot</a>'ga <b>/start</b> bosing.</span>
+            </div>
+
             <form id="loginForm" onsubmit="handleSubmit(event)">
                 <div class="phone-input-wrapper">
                     <span class="prefix">+998</span>
@@ -244,6 +273,10 @@
 
             document.querySelectorAll('[data-uz]').forEach(el => {
                 el.textContent = el.getAttribute('data-' + lang);
+            });
+
+            document.querySelectorAll('[data-uz-html]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang + '-html');
             });
         }
 
