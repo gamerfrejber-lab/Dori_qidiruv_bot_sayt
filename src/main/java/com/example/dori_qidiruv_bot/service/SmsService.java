@@ -8,6 +8,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Random;
@@ -31,14 +33,26 @@ public class SmsService {
     @Value("${eskiz.from:4546}")
     private String from;
 
+    @Value("${telegram.notify.url:}")
+    private String telegramNotifyUrl;
+
+    @Value("${telegram.notify.token:}")
+    private String telegramNotifyToken;
+
     private volatile String cachedToken;
     private volatile Instant tokenExpiresAt = Instant.EPOCH;
 
     /**
-     * SMS yuborish. Eskiz.uz hisobi sozlanmagan bo'lsa (email/password bo'sh),
-     * test rejimida ishlaydi va kodni faqat logga yozadi.
+     * SMS yuborish. Avval Telegram bot orqali yuborishga urinadi (agar foydalanuvchi botga
+     * /start bosgan bo'lsa). Ishlamasa Eskiz.uz'ga o'tadi; Eskiz ham sozlanmagan bo'lsa
+     * (email/password bo'sh) test rejimida ishlaydi va kodni faqat logga yozadi.
      */
     public void sendVerificationCode(String phoneNumber, String code) {
+        if (sendViaTelegram(phoneNumber, code)) {
+            log.info("Kod Telegram bot orqali yuborildi: {}", phoneNumber);
+            return;
+        }
+
         if (email.isBlank() || password.isBlank()) {
             log.info("SMS yuborildi (test rejimi): {} raqamiga kod: {}", phoneNumber, code);
             return;
@@ -50,6 +64,25 @@ public class SmsService {
             log.info("SMS Eskiz orqali yuborildi: {}", phoneNumber);
         } catch (Exception e) {
             log.error("Eskiz orqali SMS yuborib bo'lmadi ({}). Kod: {}", phoneNumber, code, e);
+        }
+    }
+
+    /**
+     * Telegram bot orqali yuborishga urinadi. Foydalanuvchi botga /start bosmagan bo'lsa
+     * yoki bot ishlamayotgan bo'lsa, jim qolib false qaytaradi (keyingi kanal sinaladi).
+     */
+    private boolean sendViaTelegram(String phoneNumber, String code) {
+        if (telegramNotifyUrl.isBlank()) return false;
+        try {
+            String url = telegramNotifyUrl
+                    + "?phone=" + URLEncoder.encode(phoneNumber, StandardCharsets.UTF_8)
+                    + "&code=" + URLEncoder.encode(code, StandardCharsets.UTF_8)
+                    + "&token=" + URLEncoder.encode(telegramNotifyToken, StandardCharsets.UTF_8);
+            restClient.post().uri(url).retrieve().toBodilessEntity();
+            return true;
+        } catch (Exception e) {
+            log.warn("Telegram bot orqali yuborib bo'lmadi ({}): {}", phoneNumber, e.getMessage());
+            return false;
         }
     }
 
