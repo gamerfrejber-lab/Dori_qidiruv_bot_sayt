@@ -39,3 +39,91 @@ This generated password is for development use only. Your security configuration
 2026-07-24T21:28:37.112+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
 2026-07-24T21:28:37.114+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/send-code
 2026-07-24T21:28:37.796+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] c.e.dori_qidiruv_bot.service.SmsService  : Kod Telegram bot orqali yuborildi: +998950792008
+2026-07-24T21:38:38.217+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /
+2026-07-24T21:38:38.356+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:38.356+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /
+2026-07-24T21:38:39.253+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /index.html
+2026-07-24T21:38:39.253+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /index.html
+2026-07-24T21:38:39.531+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/dorixona
+2026-07-24T21:38:39.544+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:39.544+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/dorixona
+2026-07-24T21:38:39.917+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2026-07-24T21:38:39.917+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:39.949+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:39.965+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-24T21:38:39.965+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:39.965+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:41.993+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /login.html
+2026-07-24T21:38:41.997+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:41.997+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /login.html
+2026-07-24T21:38:42.174+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2026-07-24T21:38:42.174+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:42.174+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:42.179+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-24T21:38:42.179+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:42.182+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:47.307+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/send-code
+2026-07-24T21:38:47.320+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:47.320+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/send-code
+2026-07-24T21:38:48.216+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] c.e.dori_qidiruv_bot.service.SmsService  : Kod Telegram bot orqali yuborildi: +998950792008
+2026-07-24T21:38:48.250+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /sms.html
+2026-07-24T21:38:48.250+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:48.250+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /sms.html
+2026-07-24T21:38:48.313+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2026-07-24T21:38:48.314+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:48.316+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:48.316+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-24T21:38:48.316+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:48.316+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:58.674+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/verify
+2026-07-24T21:38:58.676+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:58.678+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/verify
+2026-07-24T21:38:59.664+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /ism.html
+2026-07-24T21:38:59.665+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:59.666+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /ism.html
+2026-07-24T21:38:59.692+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/profile
+2026-07-24T21:38:59.728+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2026-07-24T21:38:59.730+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:59.732+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:59.733+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-24T21:38:59.735+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:38:59.736+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:38:59.880+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/profile
+2026-07-24T21:39:04.187+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing PUT /api/auth/profile
+2026-07-24T21:39:04.199+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured PUT /api/auth/profile
+2026-07-24T21:39:04.340+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /index.html
+2026-07-24T21:39:04.344+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:04.345+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /index.html
+2026-07-24T21:39:04.387+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/dorixona
+2026-07-24T21:39:04.389+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:04.389+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/dorixona
+2026-07-24T21:39:04.425+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2026-07-24T21:39:04.426+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:04.428+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:39:04.430+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-24T21:39:04.434+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:04.435+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:39:10.506+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /login.html
+2026-07-24T21:39:10.507+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:10.508+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /login.html
+2026-07-24T21:39:10.557+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2026-07-24T21:39:10.562+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:10.565+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:39:10.568+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-24T21:39:10.568+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:10.568+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [io-8080-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:39:12.019+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /index.html
+2026-07-24T21:39:12.020+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:12.020+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /index.html
+2026-07-24T21:39:12.054+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/dorixona
+2026-07-24T21:39:12.054+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:12.054+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/dorixona
+2026-07-24T21:39:12.072+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2026-07-24T21:39:12.072+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:12.073+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-24T21:39:12.073+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-24T21:39:12.073+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:39:12.073+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+
+> Task :bootRun FAILED
+4 actionable tasks: 4 executed

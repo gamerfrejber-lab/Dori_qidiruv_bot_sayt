@@ -1,51 +1,15 @@
 package com.example.dori_qidiruv_bot.repository;
 
 import com.example.dori_qidiruv_bot.entity.Dori;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
+import java.util.List;
 
-@Repository
-public class DoriRepository {
-    private final Map<Long, Dori> dorilar = new ConcurrentHashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
+public interface DoriRepository extends JpaRepository<Dori, Long> {
 
-    public DoriRepository() {
-        // Test ma'lumotlari
-        save(new Dori(null, "Paratsetamol", "Парацетамол", "Фармстандарт", 5000.0, true, 1L));
-        save(new Dori(null, "Aspirin", "Аспирин", "Байер", 8000.0, true, 1L));
-        save(new Dori(null, "Ibuprofen", "Ибупрофен", "Tatximfarm", 12000.0, true, 2L));
-        save(new Dori(null, "Amoksitsillin", "Амоксициллин", "Юрия-Фарм", 15000.0, false, 2L));
-        save(new Dori(null, "Vitamin C", "Витамин С", "Фармстандарт", 7000.0, true, 3L));
-    }
-
-    public Dori save(Dori dori) {
-        if (dori.getId() == null) {
-            dori.setId(idGenerator.getAndIncrement());
-        }
-        dorilar.put(dori.getId(), dori);
-        return dori;
-    }
-
-    public List<Dori> findAll() {
-        return new ArrayList<>(dorilar.values());
-    }
-
-    public Optional<Dori> findById(Long id) {
-        return Optional.ofNullable(dorilar.get(id));
-    }
-
-    public List<Dori> findByNameContainingIgnoreCase(String name) {
-        return dorilar.values().stream()
-                .filter(d -> d.getName().toLowerCase().contains(name.toLowerCase()) ||
-                        d.getNameRu().toLowerCase().contains(name.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    public void deleteById(Long id) {
-        dorilar.remove(id);
-    }
+    @Query("SELECT d FROM Dori d WHERE LOWER(d.name) LIKE LOWER(CONCAT('%', :name, '%')) "
+            + "OR LOWER(d.nameRu) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Dori> findByNameContainingIgnoreCase(@Param("name") String name);
 }
