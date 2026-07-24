@@ -1,0 +1,41 @@
+Starting a Gradle Daemon, 4 busy Daemons could not be reused, use --status for details
+> Task :compileJava
+> Task :processResources
+> Task :classes
+> Task :resolveMainClassName
+
+> Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.0)
+
+2026-07-24T21:28:12.640+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] c.e.d.DoriQidiruvBotApplication          : Starting DoriQidiruvBotApplication using Java 17.0.20 with PID 20628 (D:\G59\Model_6\Dori_Qidiruv_bot\build\classes\java\main started by Suxrob in D:\G59\Model_6\Dori_Qidiruv_bot)
+2026-07-24T21:28:12.645+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] c.e.d.DoriQidiruvBotApplication          : No active profile set, falling back to 1 default profile: "default"
+2026-07-24T21:28:13.935+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-24T21:28:13.967+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-24T21:28:13.968+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-24T21:28:14.118+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1398 ms
+2026-07-24T21:28:14.963+05:00  WARN 20628 --- [Dori_Qidiruv_bot] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 103eec71-4acf-42d4-9144-8d009b9952eb
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-24T21:28:14.977+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-24T21:28:15.153+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-07-24T21:28:15.220+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page: class path resource [static/index.html]
+2026-07-24T21:28:15.533+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-24T21:28:15.541+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [           main] c.e.d.DoriQidiruvBotApplication          : Started DoriQidiruvBotApplication in 3.484 seconds (process running for 3.959)
+2026-07-24T21:28:37.089+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-24T21:28:37.089+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-24T21:28:37.091+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-07-24T21:28:37.102+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/send-code
+2026-07-24T21:28:37.112+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-24T21:28:37.114+05:00 DEBUG 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/send-code
+2026-07-24T21:28:37.796+05:00  INFO 20628 --- [Dori_Qidiruv_bot] [nio-8080-exec-1] c.e.dori_qidiruv_bot.service.SmsService  : Kod Telegram bot orqali yuborildi: +998950792008
